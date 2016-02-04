@@ -15,7 +15,10 @@ module AppTestMethods
       # FIXME(uwe):  We should try using YAML as well
       assert_code 'YamlLoads', "require 'yaml'" unless has_stupid_crash
 
-      assert_code 'ReadSourceFile', 'File.read(__FILE__)'
+      unless ANDROID_OS <= 15 && ON_LINUX && JRUBY_JARS_VERSION <= Gem::Version.new('1.7.13')
+        assert_code 'ReadSourceFile', 'File.read(__FILE__)'
+      end
+
       # noinspection RubyExpressionInStringInspection
       assert_code 'DirListsFilesInApk', 'Dir["#{File.dirname(__FILE__)}/*"].each{|f| raise "File #{f.inspect} not found" unless File.exists?(f)}'
       assert_code('RepeatRubotoImportWidget', 'ruboto_import_widget :TextView ; ruboto_import_widget :TextView') unless has_stupid_crash
