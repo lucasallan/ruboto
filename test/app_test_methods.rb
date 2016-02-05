@@ -62,6 +62,10 @@ module AppTestMethods
       next if file =~ /read_source_file/ && JRUBY_JARS_VERSION <= Gem::Version.new('1.7.13')
       # EMXIF
 
+      # FIXME(uwe):  Remove when we stop testing JRuby <= 1.7.13
+            next if file =~ /fragment/ && ANDROID_OS <= 15 &&
+                JRUBY_JARS_VERSION <= Gem::Version.new('1.7.13') && ON_LINUX
+
       # FIXME(uwe):  Weird total app crash when running these tests together
       # FIXME(uwe):  Remove when we stop testing api level <= 15
       next if file =~ /button|fragment|margins|navigation|psych|rss|spinner|startup_exception|subclass/ && has_stupid_crash
