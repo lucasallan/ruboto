@@ -63,7 +63,7 @@ module AppTestMethods
       # EMXIF
 
       # FIXME(uwe):  Remove when we stop testing JRuby <= 1.7.13
-            next if file =~ /button|fragment/ && ANDROID_OS <= 15 &&
+            next if file =~ /button|fragment|json/ && ANDROID_OS <= 15 &&
                 JRUBY_JARS_VERSION <= Gem::Version.new('1.7.13') && ON_LINUX
 
       # FIXME(uwe):  Weird total app crash when running these tests together
